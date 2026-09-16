@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manjunath Tanaji — AI &amp; ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#10151B;
+    --paper-alt:#161D25;
+    --ink:#EDEFE6;
+    --ink-soft:#8D9A93;
+    --blue:#5FB0E8;
+    --blue-soft:#1E3A52;
+    --amber:#E8A94F;
+    --violet:#9C8CE0;
+    --line:#26313A;
+    --white:#F9FAF6;
+    --radius:2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(95,176,232,0.14), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(156,140,224,0.10), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--blue); color:var(--paper);}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 32px;}
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.02em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--blue);
+    display:inline-block;
+  }
+  .avatar{
+    width:96px; height:96px; border-radius:50%;
+    border:1px dashed var(--line);
+    background:var(--paper-alt);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px; overflow:hidden;
+  }
+  .avatar img{width:100%; height:100%; object-fit:cover;}
+  .avatar span{
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    color:var(--ink-soft); text-align:center; padding:0 8px;
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(16,21,27,0.82);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    font-size:15px;
+  }
+  .logo span{color:var(--blue);}
+  .navlinks{display:flex; gap:28px; font-size:14px;}
+  .navlinks a{
+    text-decoration:none; color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    transition:color .15s;
+  }
+  .navlinks a:hover{color:var(--blue);}
+  @media(max-width:640px){.navlinks{display:none;}}
+
+  /* HERO */
+  .hero{
+    padding:88px 0 60px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+  }
+  @media(max-width:820px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero h1{
+    font-size:clamp(40px,6.4vw,70px);
+    line-height:1.02;
+    font-weight:700;
+    margin:18px 0 20px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--blue) 10%, var(--violet) 55%, var(--amber) 95%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero h1 .cursor{
+    display:inline-block; width:0.5ch; height:0.85em;
+    background:var(--amber); margin-left:4px;
+    animation:blink 1.1s steps(1) infinite;
+    vertical-align:-0.08em;
+  }
+  @keyframes blink{ 50%{opacity:0;} }
+  .hero p.lede{
+    max-width:52ch;
+    color:var(--ink-soft);
+    font-size:16.5px;
+  }
+  .hero-cta{
+    margin-top:32px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    padding:12px 20px;
+    border:1px solid var(--ink);
+    border-radius:var(--radius);
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:all .15s;
+  }
+  .btn.primary{background:var(--blue); color:#0A1016; border-color:var(--blue); font-weight:600;}
+  .btn.primary:hover{background:var(--amber); border-color:var(--amber); box-shadow:0 0 24px rgba(232,169,79,0.35);}
+  .btn.ghost{border-color:var(--line); color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--blue); color:var(--blue); box-shadow:0 0 20px rgba(95,176,232,0.2);}
+
+  /* signature network diagram */
+  .net-wrap{
+    position:relative;
+    aspect-ratio:1/1;
+    max-width:420px;
+    margin:0 auto;
+  }
+  .net-wrap svg{width:100%; height:100%;}
+  .net-node{fill:var(--paper); stroke:var(--ink-soft); stroke-width:1.4;}
+  .net-node.active{fill:var(--blue); stroke:var(--blue); filter:drop-shadow(0 0 6px rgba(95,176,232,0.8));
+    animation:pulseNode 3.2s ease-in-out infinite;}
+  .net-node.amber{fill:var(--amber); stroke:var(--amber); filter:drop-shadow(0 0 7px rgba(232,169,79,0.75));
+    animation:pulseNode 3.2s ease-in-out infinite; animation-delay:1.1s;}
+  @keyframes pulseNode{ 0%,100%{ opacity:1; } 50%{ opacity:0.55; } }
+  .net-link{stroke:var(--line); stroke-width:1;}
+  .net-link.pulse{
+    stroke:var(--blue);
+    stroke-dasharray:4 6;
+    animation:dash 10s linear infinite;
+    opacity:0.8;
+  }
+  @keyframes dash{ to{ stroke-dashoffset:-200; } }
+  .net-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;
+    fill:var(--ink-soft);
+  }
+
+  section{padding:64px 0;}
+  section.alt{background:var(--paper-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:36px;}
+  .section-head h2{font-size:28px; margin-top:10px;}
+
+  /* ABOUT */
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 0.7fr; gap:48px;
+  }
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--ink-soft); font-size:15.5px; max-width:60ch;}
+  .stat-block{
+    border-left:1px solid var(--line);
+    padding-left:20px;
+  }
+  .stat{margin-bottom:20px;}
+  .stat .n{font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:var(--blue);}
+  .stat .l{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em;}
+
+  /* SKILLS */
+  .skill-cols{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  @media(max-width:760px){.skill-cols{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.skill-cols{grid-template-columns:1fr;}}
+  .skill-col h3{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--blue);
+    margin-bottom:14px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    padding:6px 10px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--paper-alt);
+    color:var(--ink);
+    transition:border-color .15s, color .15s, box-shadow .15s;
+  }
+  .tag:hover{border-color:var(--blue); color:var(--blue); box-shadow:0 0 12px rgba(95,176,232,0.18);}
+
+  /* PROJECTS */
+  .proj-list{display:flex; flex-direction:column;}
+  .proj{
+    display:grid; grid-template-columns:90px 1fr;
+    gap:24px;
+    padding:28px 20px;
+    margin:0 -20px;
+    border-top:1px solid var(--line);
+    border-radius:var(--radius);
+    transition:background .18s;
+  }
+  .proj:hover{background:rgba(95,176,232,0.05);}
+  .proj:last-child{border-bottom:1px solid var(--line);}
+  .proj .idx{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px; color:var(--blue); padding-top:4px;
+  }
+  .proj h3{font-size:20px; margin-bottom:6px;}
+  .proj .period{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; color:var(--blue); display:block; margin-bottom:10px;
+  }
+  .proj p{color:var(--ink-soft); max-width:62ch; font-size:15px; margin-bottom:12px;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .stack-row span{
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    color:var(--ink-soft); background:var(--paper); border:1px solid var(--line);
+    padding:3px 8px; border-radius:var(--radius);
+  }
+
+  .award-card{transition:border-color .18s, box-shadow .18s;}
+  .award-card:hover{border-color:var(--amber); box-shadow:0 0 20px rgba(232,169,79,0.12);}
+
+  /* EXPERIENCE / EDUCATION timeline */
+  .tl{border-left:1px solid var(--line); margin-left:6px;}
+  .tl-item{position:relative; padding:0 0 32px 28px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-5px; top:4px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--paper); border:1.6px solid var(--blue);
+    box-shadow:0 0 8px rgba(95,176,232,0.6);
+  }
+  .tl-item .period{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  .tl-item h3{font-size:17px; margin:4px 0 4px;}
+  .tl-item .org{color:var(--blue); font-size:13.5px; font-weight:500;}
+  .tl-item p{color:var(--ink-soft); font-size:14.5px; margin-top:6px; max-width:60ch;}
+
+  /* CERTS + AWARDS */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media(max-width:760px){.grid-2{grid-template-columns:1fr;}}
+  .cert-list{list-style:none;}
+  .cert-list li{
+    display:flex; gap:10px; align-items:baseline;
+    padding:10px 0; border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .cert-list li::before{content:"◆"; color:var(--amber); font-size:9px;}
+  .clickable{cursor:pointer; transition:color .15s;}
+  li.clickable:hover, h3.clickable:hover{color:var(--blue);}
+  li.clickable::after{content:"↗"; margin-left:auto; padding-left:10px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  h3.clickable{display:inline;}
+  h3.clickable::after{content:" ↗"; font-size:14px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+
+  /* MODAL */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(10,14,18,0.72);
+    backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center;
+    z-index:200; padding:24px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--paper-alt); border:1px solid var(--line);
+    border-radius:var(--radius); max-width:520px; width:100%;
+    padding:32px; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .modal-close{
+    position:absolute; top:16px; right:16px;
+    background:none; border:1px solid var(--line); color:var(--ink-soft);
+    width:30px; height:30px; border-radius:var(--radius); cursor:pointer;
+    font-family:'IBM Plex Mono',monospace; font-size:14px;
+    transition:border-color .15s, color .15s;
+  }
+  .modal-close:hover{border-color:var(--blue); color:var(--blue);}
+  .modal-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--amber);}
+  .modal-box h3{font-size:20px; margin:10px 0 14px; padding-right:20px;}
+  .modal-box p{color:var(--ink-soft); font-size:14.5px; margin-bottom:18px;}
+  .modal-preview{
+    border:1px dashed var(--line); border-radius:var(--radius);
+    padding:28px; text-align:center; color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+    margin-bottom:18px; background:var(--paper);
+  }
+  .modal-preview img{max-width:100%; border-radius:var(--radius); display:block; margin:0 auto;}
+  .modal-actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .award-card{
+    border:1px solid var(--line); background:var(--paper-alt);
+    padding:20px; border-radius:var(--radius);
+  }
+  .award-card .tag-mini{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--amber);
+    text-transform:uppercase; letter-spacing:.06em;
+  }
+  .award-card p{margin-top:8px; font-size:14.5px; color:var(--ink-soft);}
+
+  /* CONTACT */
+  footer{padding:70px 0 40px;}
+  .contact-grid{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;
+  }
+  .contact-grid h2{font-size:34px; max-width:12ch;}
+  .contact-links{display:flex; flex-direction:column; gap:10px;}
+  .contact-links a{
+    font-family:'IBM Plex Mono',monospace; font-size:14px;
+    text-decoration:none; display:flex; gap:10px; align-items:center;
+    color:var(--ink-soft); transition:color .15s;
+  }
+  .contact-links a:hover{color:var(--blue);}
+  .foot-note{
+    margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .net-link.pulse{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <!-- PHOTO PLACEHOLDER: replace the div below with
+           <img src="your-photo.jpg" alt="Manjunath Tanaji"> 
+           (keep the class="avatar" for the circular styling) -->
+      <div class="avatar" aria-hidden="true">
+        <img src="me.jpg" alt="Manjunath Tanaji">
+      </div>
+      <span class="eyebrow">AI &amp; ML Engineering Student</span>
+      <h1>Manjunath<br>Tanaji</h1>
+      <p class="lede">Computer Science (AI &amp; ML) undergrad at Vardhaman College of Engineering, Hyderabad — focused on explainable models, applied prediction systems, and turning research into working software.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#projects">View projects →</a>
+        <a class="btn ghost" href="mailto:manjunathtanaji4925@gmail.com">Get in touch</a>
+      </div>
+    </div>
+    <div class="net-wrap">
+      <svg viewBox="0 0 400 400">
+        <!-- links -->
+        <g class="net-link">
+          <line x1="80" y1="90" x2="200" y2="60"/>
+          <line x1="80" y1="90" x2="200" y2="150"/>
+          <line x1="80" y1="200" x2="200" y2="60"/>
+          <line x1="80" y1="200" x2="200" y2="150"/>
+          <line x1="80" y1="200" x2="200" y2="250"/>
+          <line x1="80" y1="310" x2="200" y2="150"/>
+          <line x1="80" y1="310" x2="200" y2="250"/>
+          <line x1="80" y1="310" x2="200" y2="340"/>
+          <line x1="200" y1="60" x2="320" y2="120"/>
+          <line x1="200" y1="150" x2="320" y2="120"/>
+          <line x1="200" y1="150" x2="320" y2="220"/>
+          <line x1="200" y1="250" x2="320" y2="120"/>
+          <line x1="200" y1="250" x2="320" y2="220"/>
+          <line x1="200" y1="340" x2="320" y2="220"/>
+        </g>
+        <g class="net-link pulse">
+          <line x1="80" y1="200" x2="200" y2="150"/>
+          <line x1="200" y1="150" x2="320" y2="120"/>
+          <line x1="80" y1="310" x2="200" y2="250"/>
+          <line x1="200" y1="250" x2="320" y2="220"/>
+        </g>
+        <!-- nodes: input layer -->
+        <circle class="net-node" cx="80" cy="90" r="8"/>
+        <circle class="net-node active" cx="80" cy="200" r="8"/>
+        <circle class="net-node" cx="80" cy="310" r="8"/>
+        <!-- hidden -->
+        <circle class="net-node" cx="200" cy="60" r="7"/>
+        <circle class="net-node active" cx="200" cy="150" r="7"/>
+        <circle class="net-node" cx="200" cy="250" r="7"/>
+        <circle class="net-node" cx="200" cy="340" r="7"/>
+        <!-- output -->
+        <circle class="net-node amber" cx="320" cy="120" r="9"/>
+        <circle class="net-node amber" cx="320" cy="220" r="9"/>
+
+        <text class="net-label" x="30" y="55">data</text>
+        <text class="net-label" x="170" y="30">features</text>
+        <text class="net-label" x="300" y="95">risk</text>
+        <text class="net-label" x="300" y="255">signal</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="eyebrow">About</span>
+      <h2>Objective</h2>
+      <p>Dedicated Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning, with a working knowledge of Python, Java, and Data Structures. Passionate about solving real-world problems through technology, and eager to contribute to impactful projects while continuously learning emerging tools and techniques.</p>
+    </div>
+    <div class="stat-block">
+      <div class="stat"><div class="n">7.91</div><div class="l">CGPA · B.Tech CSE (AI&amp;ML)</div></div>
+      <div class="stat"><div class="n">2027</div><div class="l">Expected graduation</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">Certifications earned</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Skills</span>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h3>Languages</h3>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Java</span>
+          <span class="tag">C</span><span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Libraries &amp; Frameworks</h3>
+        <div class="tag-row">
+          <span class="tag">Pandas</span><span class="tag">NumPy</span>
+          <span class="tag">Scikit-Learn</span><span class="tag">Streamlit</span>
+          <span class="tag">Matplotlib</span><span class="tag">SHAP</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Databases</h3>
+        <div class="tag-row">
+          <span class="tag">MySQL</span><span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Coursework</h3>
+        <div class="tag-row">
+          <span class="tag">Data Structures &amp; Algorithms</span>
+          <span class="tag">Operating Systems</span>
+          <span class="tag">DBMS</span>
+          <span class="tag">Computer Networks</span>
+          <span class="tag">Software Engineering</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Soft Skills</h3>
+        <div class="tag-row">
+          <span class="tag">Problem Solving</span><span class="tag">Teamwork</span>
+          <span class="tag">Communication</span><span class="tag">Adaptability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Projects</span>
+      <h2>Academic projects</h2>
+    </div>
+    <div class="proj-list">
+      <div class="proj">
+        <div class="idx mono">01</div>
+        <div>
+          <h3 class="clickable" data-modal="proj-1">Explainable AI Framework for Cardiovascular Risk Prediction</h3>
+          <span class="period">Nov 2025 – Apr 2026</span>
+          <p>Built an explainable AI model for cardiovascular risk prediction using interpretable machine learning techniques — presented as a research paper at ICSUD 2026, NIT Rourkela.</p>
+          <div class="stack-row">
+            <span>Python</span><span>Pandas</span><span>NumPy</span><span>Scikit-Learn</span><span>SHAP</span><span>Matplotlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="idx mono">02</div>
+        <div>
+          <h3 class="clickable" data-modal="proj-2">Stock Market Behaviour Prediction Using Machine Learning</h3>
+          <span class="period">Jun 2025 – Oct 2025</span>
+          <p>Developed a Streamlit application to predict stock market behaviour using machine learning models trained on historical data.</p>
+          <div class="stack-row">
+            <span>Python</span><span>Pandas</span><span>NumPy</span><span>Scikit-Learn</span><span>Streamlit</span><span>Matplotlib</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="experience">
+  <div class="wrap grid-2">
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Experience</span>
+        <h2>Internships</h2>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <span class="period">Jan 2026 – Feb 2026</span>
+          <h3>Python Programming Intern</h3>
+          <span class="org">CodSoft · Virtual</span>
+          <p>Completed Python programming tasks involving problem-solving and application development, strengthening core programming fundamentals through practical assignments.</p>
+        </div>
+        <div class="tl-item">
+          <span class="period">Jul 2025 – Aug 2025</span>
+          <h3>AI &amp; Prompt Engineering Intern</h3>
+          <span class="org">VaultofCodes · Virtual</span>
+          <p>Worked on AI and prompt engineering using large language models, designing prompts and exploring practical AI applications through hands-on tasks.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Education</span>
+        <h2>Academic path</h2>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <span class="period">2023 – 2027</span>
+          <h3>B.Tech, Computer Science (AI &amp; ML)</h3>
+          <span class="org">Vardhaman College of Engineering, Hyderabad</span>
+          <p>CGPA: 7.91</p>
+        </div>
+        <div class="tl-item">
+          <span class="period">2021 – 2023</span>
+          <h3>Intermediate (MPC)</h3>
+          <span class="org">Sri Chaitanya Junior College, Hyderabad</span>
+          <p>87.6%</p>
+        </div>
+        <div class="tl-item">
+          <span class="period">2021</span>
+          <h3>SSC</h3>
+          <span class="org">St. Paul's High School, Hyderabad</span>
+          <p>GPA: 10.0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid-2">
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Certifications</span>
+        <h2>Credentials</h2>
+      </div>
+      <ul class="cert-list">
+        <li class="clickable" data-modal="cert-1">Programming, Data Structures and Algorithms using Python — NPTEL (IIT Madras)</li>
+        <li class="clickable" data-modal="cert-2">Python Programming (Self-Paced) — GeeksforGeeks</li>
+        <li class="clickable" data-modal="cert-3">Python (Basic) Skill Certification — HackerRank</li>
+        <li class="clickable" data-modal="cert-4">Java (Basic) Skill Certification — HackerRank</li>
+        <li class="clickable" data-modal="cert-5">Problem Solving (Basic) Skill Certification — HackerRank</li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">Recognition</span>
+        <h2>Awards</h2>
+      </div>
+      <div class="award-card">
+        <span class="tag-mini">Conference Presentation</span>
+        <p>Presented the research paper "Explainable AI Framework for Cardiovascular Risk Prediction" at the International Conference on Sustainable Urban Development (ICSUD 2026), organized by NIT Rourkela.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="alt">
+  <div class="wrap">
+    <div class="contact-grid">
+      <h2>Let's build something together.</h2>
+      <div class="contact-links">
+        <a href="mailto:manjunathtanaji4925@gmail.com">↳ manjunathtanaji4925@gmail.com</a>
+        <a href="tel:+917569601457">↳ +91 7569601457</a>
+        <a href="https://github.com/manjunathtanaji4925" target="_blank" rel="noopener">↳ github.com/manjunathtanaji4925</a>
+        <a href="https://linkedin.com/in/manjunath-tanaji-4724422a7" target="_blank" rel="noopener">↳ linkedin.com/in/manjunath-tanaji</a>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>© 2026 Manjunath Tanaji</span>
+      <span>Vardhaman College of Engineering · Hyderabad</span>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <span class="modal-eyebrow" id="modalEyebrow">Certificate</span>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-preview" id="modalPreview">
+      <!-- Replace this block's content with:
+           <img src="certs/nptel.jpg" alt="Certificate"> 
+           for the matching item once you have the image/PDF -->
+      Certificate image not added yet.<br>Drop the image file in and update its &lt;img src&gt; in the code.
+    </div>
+    <p id="modalDesc"></p>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<script>
+  const modalData = {
+    "cert-1": {
+      eyebrow: "Certificate",
+      title: "Programming, Data Structures and Algorithms using Python",
+      desc: "Issued by NPTEL (IIT Madras).",
+      link: null,
+      image:"nptel.png",
+    },
+    "cert-2": {
+      eyebrow: "Certificate",
+      title: "Python Programming (Self-Paced)",
+      desc: "Issued by GeeksforGeeks.",
+      link: null,
+      image:"gfg.png"
+    },
+    "cert-3": {
+      eyebrow: "Certificate",
+      title: "Python (Basic) Skill Certification",
+      desc: "Issued by HackerRank.",
+      link: null,
+      image:"pythonhck.png"
+    },
+    "cert-4": {
+      eyebrow: "Certificate",
+      title: "Java (Basic) Skill Certification",
+      desc: "Issued by HackerRank.",
+      link: null,
+      image:"javahck.png"
+    },
+    "cert-5": {
+      eyebrow: "Certificate",
+      title: "Problem Solving (Basic) Skill Certification",
+      desc: "Issued by HackerRank.",
+      link: null,
+      image:"problemsolvinghck.png"
+    },
+    "proj-1": {
+      eyebrow: "Project",
+      title: "Explainable AI Framework for Cardiovascular Risk Prediction",
+      desc: "Nov 2025 – Apr 2026. Built an explainable AI model for cardiovascular risk prediction using interpretable machine learning. Presented as a research paper at ICSUD 2026, NIT Rourkela. Stack: Python, Pandas, NumPy, Scikit-Learn, SHAP, Matplotlib.",
+      link: "https://github.com/manjunathtanaji4925"
+    },
+    "proj-2": {
+      eyebrow: "Project",
+      title: "Stock Market Behaviour Prediction Using Machine Learning",
+      desc: "Jun 2025 – Oct 2025. Developed a Streamlit application for stock market behaviour prediction using machine learning. Stack: Python, Pandas, NumPy, Scikit-Learn, Streamlit, Matplotlib.",
+      link: "https://github.com/manjunathtanaji4925"
+    }
+  };
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalEyebrow = document.getElementById('modalEyebrow');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalPreview = document.getElementById('modalPreview');
+  const modalActions = document.getElementById('modalActions');
+
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.getAttribute('data-modal');
+      const d = modalData[key];
+      if (!d) return;
+      modalEyebrow.textContent = d.eyebrow;
+      modalTitle.textContent = d.title;
+      modalDesc.textContent = d.desc;
+      modalPreview.innerHTML = d.image
+        ? `<img src="${d.image}" alt="${d.title}">`
+        : (d.eyebrow === "Certificate"
+            ? 'Certificate image not added yet.<br>Drop the image/PDF in and update its &lt;img src&gt; in the code.'
+            : 'Project screenshot not added yet.<br>Drop an image in and update its &lt;img src&gt; in the code.');
+      modalActions.innerHTML = d.link
+        ? `<a class="btn primary" href="${d.link}" target="_blank" rel="noopener">View on GitHub →</a>`
+        : '';
+      overlay.classList.add('open');
+    });
+  });
+
+  function closeModal(){ overlay.classList.remove('open'); }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
